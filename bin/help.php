@@ -12,7 +12,7 @@ foreach ($packageJson['scriptsHelp'] as $scriptName => $scriptHelp)
 		$pre = 'npm run ';
 	}
 	
-	$output[] = "* $pre$scriptName" . NL . "  $scriptHelp" . NL;
+	$output[] = "* $pre$scriptName" . NL . "- $scriptHelp" . NL;
 }
 
 echo implode(NL, $output) . NL;
