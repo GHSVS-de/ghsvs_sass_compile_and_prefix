@@ -23,7 +23,7 @@ Optional: `npm run ghs-watch`
   - raw: Variable $npm_package_DIR_raw. Temporary local directory inside work directory where not prefixed files are saved (relative path).
 
 * npm run ghs-npm-update-check
-  Check for updates for packages in package.json. Prints a list, not more.
+  - Check for updates for packages in package.json. Prints a list, not more.
 
 * npm run ghs-ncu-override-json
   Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!
