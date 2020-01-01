@@ -60,7 +60,7 @@ Optional: `npm run ghs-watch`
 #### npm run ghs-produktiv
 - Runs several npm scripts. Makes dirs $npm_package_DIR_css and $npm_package_DIR_cssRaw in target. Copies all compiled files accordingly.
 
-##### Example DIR config.
+##### package.json. Example `DIR` config.
  ```Array
 (
     [scss] => /mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss
@@ -69,3 +69,26 @@ Optional: `npm run ghs-watch`
     [work] => ghs
     [raw] => raw
 )
+```
+
+##### package.json. `scripts` block.
+ ```Array
+(
+    [ghs-help] => php ./bin/help.php
+    [ghs-npm-update-check] => ncu
+    [ghs-ncu-override-json] => ncu -u
+    [ghs-watch] => nodemon --watch $npm_package_DIR_scss/ --ext scss --exec "npm run ghs-all"
+    [ghs-all] => npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv
+    [ghs-rm] => cross-env-shell "shx rm -rf $npm_package_DIR_work"
+    [ghs-mkdir] => cross-env-shell "shx mkdir -p $npm_package_DIR_work/$npm_package_DIR_raw"
+    [ghs-compile] => node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 $npm_package_DIR_scss/ -o $npm_package_DIR_work/
+    [ghs-copy-raw] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_raw
+    [ghs-prefix] => postcss --config build/postcss.config.js --replace "$npm_package_DIR_work/*.css" "!$npm_package_DIR_work/*.min.css"
+    [ghs-minify] => php ./bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw
+    [ghs-produktiv] => npm-run-all ghs-produktiv-*
+    [ghs-produktiv-mkdir] => cross-env-shell "shx mkdir -p $npm_package_DIR_css/__Prefixed-CSS" && cross-env-shell "shx mkdir -p $npm_package_DIR_cssRaw/__NOT-Prefixed-CSS"
+    [ghs-produktiv-copy] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_css/
+    [ghs-produktiv-copyRaw] => cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_cssRaw/
+)
+```
+
