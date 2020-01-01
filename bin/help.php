@@ -15,4 +15,6 @@ foreach ($packageJson['scriptsHelp'] as $scriptName => $scriptHelp)
 	$output[] = "#### $pre$scriptName" . NL . "- $scriptHelp" . NL;
 }
 
+$output[] = '##### Example DIR config.' . NL . ' ```' . print_r($packageJson['DIR'], true) . '```' . NL;
+
 echo implode(NL, $output) . NL;

@@ -53,3 +53,14 @@
 #### npm run ghs-produktiv
 - Runs several npm scripts. Makes dirs $npm_package_DIR_css and $npm_package_DIR_cssRaw in target. Copies all compiled files accordingly.
 
+##### Example DIR config.
+ ```Array
+(
+    [scss] => /mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss
+    [css] => /mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css
+    [cssRaw] => /mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw
+    [work] => ghs
+    [raw] => raw
+)
+```
+
