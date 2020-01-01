@@ -9,7 +9,7 @@ Optional: `npm run ghs-watch`
 ===========npm run ghs-help==============
 > php ./bin/help.php
 
-### What?
+# What?
 - Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
 
 * Tested?
