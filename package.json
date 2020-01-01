@@ -1,11 +1,30 @@
 {
   "name": "ghsvs_sass_compile_and_prefix",
   "description": "Kompilieren und autoprefixen von scss in Template bs4ghsvs.",
-  "version": "2019.12.26",
-  "PathScss": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss",
-  "PathCss": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css",
-  "FolderWork": "ghs",
-  "FolderPrefixed": "vendor-prefixed",
+  "version": "2020.01.01",
+	"DIR": {
+		"scss": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss",
+		"css": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css",
+		"cssRaw": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw",
+		"work": "ghs",
+		"raw": "raw"
+	},
+	"scriptsHelp": {
+		"What?": "Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.", 
+		"How to start a script": "npm run [SCRIPTKEY]",
+		"The DIR-Array": "scss: Variable $npm_package_DIR_scss. The *.scss-directory (absolute path).\n  css: Variable $npm_package_DIR_css. Directory where all the compiled, prefixed, minified CSS files are copied to after all jobs are done (absolute path).\n  cssRaw: Variable $npm_package_DIR_cssRaw. Directory where all the compiled, minified, **BUT NOT PREFIXED(!)** CSS files are copied to after all jobs are done (absolute path).\n  work: Variable $npm_package_DIR_work. Temporary local work directory inside same folder where package.json is located (relative path).\n  raw: Variable $npm_package_DIR_raw. Temporary local directory inside work directory where not prefixed files are saved (relative path).",
+		"ghs-npm-update-check": "Check for updates for packages in package.json. Prints a list, not more.",
+		"ghs-ncu-override-json": "Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!",
+		"ghs-watch": "Starts a nodemon watcher for changes in scss directory $npm_package_DIR_scss that starts a complete, new compilation via 'npm run ghs-all' when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
+		"ghs-all": "Runs a complete job: ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv",
+		"ghs-rm": "Deletes **local** work directory $npm_package_DIR_work and $npm_package_DIR_raw inside.",
+		"ghs-mkdir": "Creates **local** work directory $npm_package_DIR_work plus subdirecty $npm_package_DIR_raw.",
+		"ghs-compile": "Compiles *.scss files from $npm_package_DIR_scss to *.css files in **local** work dir $npm_package_DIR_work.",
+		"ghs-copy-raw": "Copies *.css and *.css.map to local dir $npm_package_DIR_raw.",
+		"ghs-prefix": "Runs Autoprefixer (See file '.browserslistrc'). \n  Source: All *.css files in **local** work dir $npm_package_DIR_work. \n  Target: Replaces *.css files in **local** work dir.",
+		"ghs-minify": "Minifies all *.css to *.min.css in **local** $npm_package_DIR_work and $npm_package_DIR_raw.",
+		"ghs-produktiv": "Runs several npm scripts. Makes dirs $npm_package_DIR_css and $npm_package_DIR_cssRaw in target. Copies all compiled files accordingly."
+	},
   "keywords": [
     "css",
     "sass",
@@ -18,24 +37,30 @@
     "G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)"
   ],
   "scripts": {
-    "ghs-bin-test": "./bin/test.sh",
+		"ghs-help": "php ./bin/help.php", 
     "ghs-npm-update-check": "ncu",
-    "ghs-ncu-override-package-json": "ncu -u",
-    "ghs-watch": "nodemon --watch $npm_package_PathScss/ --ext scss --exec \"npm run ghs-all\"",
-    "ghs-all": "npm-run-all ghs-rm ghs-mkdir ghs-mkdir-produktiv ghs-compile ghs-prefix ghs-minify ghs-copy",
-    "ghs-rm": "cross-env-shell \"shx rm -rf $npm_package_FolderWork\"",
-    "ghs-mkdir": "cross-env-shell \"shx mkdir -p $npm_package_FolderWork/$npm_package_FolderPrefixed\"",
-    "ghs-mkdir-produktiv": "cross-env-shell \"shx mkdir -p $npm_package_PathCss/$npm_package_FolderPrefixed\"",
-    "ghs-compile": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 $npm_package_PathScss/ -o $npm_package_FolderWork/",
-    "ghs-prefix": "postcss \"$npm_package_FolderWork/*.css\" --config build/postcss.config.js --dir $npm_package_FolderWork/$npm_package_FolderPrefixed/",
-    "ghs-minify": "npm-run-all --parallel ghs-minify-*",
-    "ghs-minify-prefixed-template": "cleancss --level 1 --format breakWith=lf --source-map --source-map-inline-sources --output $npm_package_FolderWork/$npm_package_FolderPrefixed/template-vendor-prefixed.css $npm_package_FolderWork/$npm_package_FolderPrefixed/template.css",
-    "ghs-minify-prefixed-print": "cleancss --level 1 --format breakWith=lf --source-map --source-map-inline-sources --output $npm_package_FolderWork/$npm_package_FolderPrefixed/print-vendor-prefixed.css $npm_package_FolderWork/$npm_package_FolderPrefixed/print.css",
-    "ghs-minify-template": "cleancss --level 1 --format breakWith=lf --source-map --source-map-inline-sources --output $npm_package_FolderWork/template.min.css $npm_package_FolderWork/template.css",
-    "ghs-minify-print": "cleancss --level 1 --format breakWith=lf --source-map --source-map-inline-sources --output $npm_package_FolderWork/print.min.css $npm_package_FolderWork/print.css",
-    "ghs-copy": "npm-run-all ghs-copy-*",
-    "ghs-copy-prefixed": "cross-env-shell shx cp $npm_package_FolderWork/$npm_package_FolderPrefixed/*-vendor-prefixed.css* $npm_package_FolderWork/",
-    "ghs-copy-toProduktiv": "cross-env-shell shx cp -r $npm_package_FolderWork/* $npm_package_PathCss/"
+    "ghs-ncu-override-json": "ncu -u",
+    "ghs-watch": "nodemon --watch $npm_package_DIR_scss/ --ext scss --exec \"npm run ghs-all\"",
+    
+		"ghs-all": "npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv",
+		
+    "ghs-rm": "cross-env-shell \"shx rm -rf $npm_package_DIR_work\"",
+
+    "ghs-mkdir": "cross-env-shell \"shx mkdir -p $npm_package_DIR_work/$npm_package_DIR_raw\"",
+    
+		"ghs-compile": "node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 $npm_package_DIR_scss/ -o $npm_package_DIR_work/",
+		
+		"ghs-copy-raw": "cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_raw",
+		
+		"ghs-prefix": "postcss --config build/postcss.config.js --replace \"$npm_package_DIR_work/*.css\" \"!$npm_package_DIR_work/*.min.css\"",
+		
+		"ghs-minify": "php ./bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw",
+		
+		"ghs-produktiv": "npm-run-all ghs-produktiv-*",
+		"ghs-produktiv-mkdir": "cross-env-shell \"shx mkdir -p $npm_package_DIR_css/__Prefixed-CSS\" && cross-env-shell \"shx mkdir -p $npm_package_DIR_cssRaw/__NOT-Prefixed-CSS\"",
+    "ghs-produktiv-copy": "cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_css/",
+		"ghs-produktiv-copyRaw": "cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_cssRaw/"
+		
   },
   "license": "MIT",
   "dependencies": {},
