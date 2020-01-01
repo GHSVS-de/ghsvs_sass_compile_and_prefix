@@ -8,7 +8,7 @@ Optional: `npm run ghs-watch`
 
 ===========npm run ghs-help==============
 > php ./bin/help.php
-
+```
 * What?
   Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
 
@@ -56,3 +56,4 @@ Optional: `npm run ghs-watch`
 
 * npm run ghs-produktiv
   Runs several npm scripts. Makes dirs $npm_package_DIR_css and $npm_package_DIR_cssRaw in target. Copies all compiled files accordingly.
+```
