@@ -10,7 +10,7 @@ Optional: `npm run ghs-watch`
 > php ./bin/help.php
 
 * What?
-** Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
+* * Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
 
 * Tested?
 - Only with WSL (Windows Subsystem for Linux) + PHP 7.3 + Node + NPM on local machine.
