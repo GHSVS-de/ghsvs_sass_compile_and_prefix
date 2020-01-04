@@ -4,27 +4,36 @@
   "version": "2020.01.01",
 	"DIR": {
 		"scss": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss",
-		"css": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css",
-		"cssRaw": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw",
+		"target": "/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs",
 		"work": "ghs",
-		"raw": "raw"
+		"css": "css",
+		"raw": "css-raw",
+		"ftp": "ftp-transfer"
 	},
 	"scriptsHelp": {
-		"What?": "Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.",
-		"Tested?": "Only with WSL (Windows Subsystem for Linux) + PHP 7.3 + Node + NPM on local machine.", 
-		"How to start a script": "npm run [SCRIPTKEY]",
-		"The DIR-Array": "scss: Variable $npm_package_DIR_scss. The *.scss-directory (absolute path).\n- css: Variable $npm_package_DIR_css. Directory where all the compiled, prefixed, minified CSS files are copied to after all jobs are done (absolute path).\n- cssRaw: Variable $npm_package_DIR_cssRaw. Directory where all the compiled, minified, **BUT NOT PREFIXED(!)** CSS files are copied to after all jobs are done (absolute path).\n- work: Variable $npm_package_DIR_work. Temporary local work directory inside same folder where package.json is located (relative path).\n- raw: Variable $npm_package_DIR_raw. Temporary local directory inside work directory where not prefixed files are saved (relative path).",
 		"ghs-npm-update-check": "Check for updates for packages in package.json. Prints a list, not more.",
 		"ghs-ncu-override-json": "Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!",
-		"ghs-watch": "Starts a nodemon watcher for changes in scss directory $npm_package_DIR_scss that starts a complete, new compilation via 'npm run ghs-all' when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
-		"ghs-all": "Runs a complete job: ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv",
-		"ghs-rm": "Deletes **local** work directory $npm_package_DIR_work and $npm_package_DIR_raw inside.",
-		"ghs-mkdir": "Creates **local** work directory $npm_package_DIR_work plus subdirecty $npm_package_DIR_raw.",
-		"ghs-compile": "Compiles *.scss files from $npm_package_DIR_scss to *.css files in **local** work dir $npm_package_DIR_work.",
-		"ghs-copy-raw": "Copies *.css and *.css.map to local dir $npm_package_DIR_raw.",
-		"ghs-prefix": "Runs Autoprefixer (See file '.browserslistrc'). \n- Source: All *.css files in **local** work dir $npm_package_DIR_work. \n- Target: Replaces *.css files in **local** work dir.",
-		"ghs-minify": "Minifies all *.css to *.min.css in **local** $npm_package_DIR_work and $npm_package_DIR_raw.",
-		"ghs-produktiv": "Runs several npm scripts. Makes dirs $npm_package_DIR_css and $npm_package_DIR_cssRaw in target. Copies all compiled files accordingly."
+		"ghs-watch": "Starts a nodemon watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
+		"ghs-all": "Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`",
+		"ghs-rm": "Deletes **local** work directory `$npm_package_DIR_work` completely.",
+		"ghs-mkdir": "Creates **local** work directories `$npm_package_DIR_work/$npm_package_DIR_raw`.",
+		"ghs-compile": "Compiles *.scss files from `$npm_package_DIR_scss` to *.css files in **local** work dir `$npm_package_DIR_work`.",
+		"ghs-copy-raw": "Copies *.css and *.css.map to local dir `$npm_package_DIR_work/$npm_package_DIR_raw`.",
+		"ghs-prefix": "Runs Autoprefixer (See file `.browserslistrc`). \n- Source: All *.css files in **local** work dir `$npm_package_DIR_work`. \n- Target: Replaces *.css files in same dir.",
+		"ghs-minify": "Minifies all *.css to *.min.css in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.",
+		"ghs-produktiv": "Runs several npm scripts that match `ghs-produktiv-*`.",
+		"ghs-produktiv-mkdir": "Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and version.txt files (datetime).",
+		"ghs-produktiv-copy": "Copies all prefixed *.css and *.map to  TARGET dir `$npm_package_DIR_target/$npm_package_DIR_css`.",
+		"ghs-produktiv-copyRaw": "Copies all NON-prefixed *.css and *.map to TARGET dir `$npm_package_DIR_target/$npm_package_DIR_raw`.",
+
+		"ghs-ftp": "Runs several npm scripts that match `ghs-ftp-*`. to **prepare** **locally** the upload of files via FTP. **Runs no FTP upload.**", 
+		
+		"ghs-ftp-mkdir": "Creates local dirs `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css` and `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw` and subfolders with `version.txt` files (datetime).",
+		"ghs-ftp-copy": "Copies all prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css`.",
+		"ghs-ftp-copyRaw": "Copies all NON-prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw`.",
+		
+		"ghs-upload": "Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it."
+		
 	},
   "keywords": [
     "css",
@@ -38,12 +47,13 @@
     "G@HService Berlin Neukölln, Volkmar Volli Schlothauer (ghsvs.de)"
   ],
   "scripts": {
-		"ghs-help": "php ./bin/help.php", 
+		"ghs-help": "php bin/help.php",
+		"ghs-help-real-paths": "php bin/help.php -r", 
     "ghs-npm-update-check": "ncu",
     "ghs-ncu-override-json": "ncu -u",
     "ghs-watch": "nodemon --watch $npm_package_DIR_scss/ --ext scss --exec \"npm run ghs-all\"",
     
-		"ghs-all": "npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv",
+		"ghs-all": "npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp",
 		
     "ghs-rm": "cross-env-shell \"shx rm -rf $npm_package_DIR_work\"",
 
@@ -58,9 +68,20 @@
 		"ghs-minify": "php ./bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw",
 		
 		"ghs-produktiv": "npm-run-all ghs-produktiv-*",
-		"ghs-produktiv-mkdir": "cross-env-shell \"shx mkdir -p $npm_package_DIR_css/__Prefixed-CSS\" && cross-env-shell \"shx mkdir -p $npm_package_DIR_cssRaw/__NOT-Prefixed-CSS\"",
-    "ghs-produktiv-copy": "cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_css/",
-		"ghs-produktiv-copyRaw": "cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_cssRaw/"
+		
+		"ghs-produktiv-mkdir": "php bin/writeVersion.php -w $npm_package_DIR_target",
+		
+    "ghs-produktiv-copy": "cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_target/$npm_package_DIR_css/",
+		"ghs-produktiv-copyRaw": "cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_target/$npm_package_DIR_raw/",
+		
+		"ghs-ftp": "npm-run-all ghs-ftp-*",
+
+		"ghs-ftp-mkdir": "php bin/writeVersion.php -w $npm_package_DIR_ftp -c",
+
+		"ghs-ftp-copy": "cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css",
+		"ghs-ftp-copyRaw": "cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw",
+		
+		"ghs-upload": "php ./bin/FTPRecursiveFolderUpload.php"
 		
   },
   "license": "MIT",
