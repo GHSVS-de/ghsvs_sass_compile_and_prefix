@@ -8,7 +8,7 @@ $options = getopt($shortopts);
 
 if (empty($options['w']))
 {
-	echo 'Error in ' . __FILE__ . '. Argument -w missing.' . PHP_EOL . print_r($options, true) . PHP_EOL . PHP_EOL;
+	echo 'Error in ' . __FILE__ . '. Argument -w missing.' . NL . print_r($options, true) . NL . NL;
 	exit;
 }
 
@@ -16,7 +16,7 @@ $w = JPATH_MAIN . $options['w'];
 
 if (!is_dir($w))
 {
-	echo 'Error in ' . __FILE__ . '. Wrong paths.' . PHP_EOL . print_r($options, true) . PHP_EOL . PHP_EOL;
+	echo 'Error in ' . __FILE__ . '. Wrong paths.' . NL . print_r($options, true) . NL . NL;
 	exit;
 }
 
@@ -34,7 +34,7 @@ foreach (glob("$w/*.css") as $filename)
 
 if (empty($options['r']))
 {
-	echo 'Error in ' . __FILE__ . '. Argument -r missing.' . PHP_EOL . print_r($options, true) . PHP_EOL . PHP_EOL;
+	echo 'Error in ' . __FILE__ . '. Argument -r missing.' . NL . print_r($options, true) . NL . NL;
 	exit;
 }
 
@@ -42,7 +42,7 @@ $r = JPATH_MAIN . $options['r'];
 
 if (!is_dir($r))
 {
-	echo 'Error in ' . __FILE__ . '. Wrong paths -r.' . PHP_EOL . print_r($options, true) . PHP_EOL . PHP_EOL;
+	echo 'Error in ' . __FILE__ . '. Wrong paths -r.' . NL . print_r($options, true) . NL . NL;
 	exit;
 }
 

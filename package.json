@@ -11,10 +11,14 @@
 		"ftp": "ftp-transfer"
 	},
 	"scriptsHelp": {
-		"ghs-npm-update-check": "Check for updates for packages in package.json. Prints a list, not more.",
-		"ghs-ncu-override-json": "Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!",
+		"ghs-help": "Displays an overview of (nearly all) possible `npm run [SCRIPTKEY]` commands.",
+		"ghs-help-real-paths": "Like `ghs-help` but replaces path variables with values like configured in `DIR` array in `package.json`.",
+		"ghs-npm-update-check": "Check for updates for packages in `package.json`. Prints a list, not more.",
+		"ghs-ncu-override-json": "Check for updates for packages in `package.json`. AND override `package.json` file (newest stable versions). Don't forget to run npm install!",
 		"ghs-watch": "Starts a `nodemon` watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
+		"ghs-watch-upload": "Like `ghs-watch` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.",
 		"ghs-all": "Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`",
+		"ghs-all-upload": "Like `ghs-all` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.",
 		"ghs-rm": "Deletes **local** work directory `$npm_package_DIR_work` completely.",
 		"ghs-mkdir": "Creates **local** work directories `$npm_package_DIR_work/$npm_package_DIR_raw`.",
 		"ghs-compile": "Compiles *.scss files from `$npm_package_DIR_scss` to *.css files in **local** work dir `$npm_package_DIR_work`.",
@@ -52,8 +56,10 @@
     "ghs-npm-update-check": "ncu",
     "ghs-ncu-override-json": "ncu -u",
     "ghs-watch": "nodemon --watch $npm_package_DIR_scss/ --ext scss --exec \"npm run ghs-all\"",
-    
+    "ghs-watch-upload": "nodemon --watch $npm_package_DIR_scss/ --ext scss --exec \"npm run ghs-all-upload\"",
 		"ghs-all": "npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp",
+		
+		"ghs-all-upload": "npm-run-all ghs-all ghs-upload",
 		
     "ghs-rm": "cross-env-shell \"shx rm -rf $npm_package_DIR_work\"",
 
