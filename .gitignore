@@ -4,3 +4,7 @@ _notes/
 ftp-credentials.json
 *.txt
 help.txt
+test.sh
+test.php
+test2.php
+test.*
