@@ -13,7 +13,7 @@
 	"scriptsHelp": {
 		"ghs-npm-update-check": "Check for updates for packages in package.json. Prints a list, not more.",
 		"ghs-ncu-override-json": "Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!",
-		"ghs-watch": "Starts a nodemon watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
+		"ghs-watch": "Starts a `nodemon` watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
 		"ghs-all": "Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`",
 		"ghs-rm": "Deletes **local** work directory `$npm_package_DIR_work` completely.",
 		"ghs-mkdir": "Creates **local** work directories `$npm_package_DIR_work/$npm_package_DIR_raw`.",
@@ -22,7 +22,7 @@
 		"ghs-prefix": "Runs Autoprefixer (See file `.browserslistrc`). \n- Source: All *.css files in **local** work dir `$npm_package_DIR_work`. \n- Target: Replaces *.css files in same dir.",
 		"ghs-minify": "Minifies all *.css to *.min.css in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.",
 		"ghs-produktiv": "Runs several npm scripts that match `ghs-produktiv-*`.",
-		"ghs-produktiv-mkdir": "Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and version.txt files (datetime).",
+		"ghs-produktiv-mkdir": "Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and `version.txt` files (datetime).",
 		"ghs-produktiv-copy": "Copies all prefixed *.css and *.map to  TARGET dir `$npm_package_DIR_target/$npm_package_DIR_css`.",
 		"ghs-produktiv-copyRaw": "Copies all NON-prefixed *.css and *.map to TARGET dir `$npm_package_DIR_target/$npm_package_DIR_raw`.",
 
