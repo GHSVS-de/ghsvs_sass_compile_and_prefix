@@ -281,31 +281,3 @@ Optional: `npm run ghs-watch`
     [ghs-upload] => php ./bin/FTPRecursiveFolderUpload.php
 )
 ```
-
-##### package.json. `scripts` block.
- ```Array
-(
-    [ghs-help] => php bin/help.php
-    [ghs-help-real-paths] => php bin/help.php -r
-    [ghs-npm-update-check] => ncu
-    [ghs-ncu-override-json] => ncu -u
-    [ghs-watch] => nodemon --watch $npm_package_DIR_scss/ --ext scss --exec "npm run ghs-all"
-    [ghs-all] => npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp
-    [ghs-rm] => cross-env-shell "shx rm -rf $npm_package_DIR_work"
-    [ghs-mkdir] => cross-env-shell "shx mkdir -p $npm_package_DIR_work/$npm_package_DIR_raw"
-    [ghs-compile] => node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 $npm_package_DIR_scss/ -o $npm_package_DIR_work/
-    [ghs-copy-raw] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_raw
-    [ghs-prefix] => postcss --config build/postcss.config.js --replace "$npm_package_DIR_work/*.css" "!$npm_package_DIR_work/*.min.css"
-    [ghs-minify] => php ./bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw
-    [ghs-produktiv] => npm-run-all ghs-produktiv-*
-    [ghs-produktiv-mkdir] => php bin/writeVersion.php -w $npm_package_DIR_target
-    [ghs-produktiv-copy] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_target/$npm_package_DIR_css/
-    [ghs-produktiv-copyRaw] => cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_target/$npm_package_DIR_raw/
-    [ghs-ftp] => npm-run-all ghs-ftp-*
-    [ghs-ftp-mkdir] => php bin/writeVersion.php -w $npm_package_DIR_ftp -c
-    [ghs-ftp-copy] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css
-    [ghs-ftp-copyRaw] => cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw
-    [ghs-upload] => php ./bin/FTPRecursiveFolderUpload.php
-)
-```
-

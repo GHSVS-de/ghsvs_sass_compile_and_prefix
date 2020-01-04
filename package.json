@@ -12,19 +12,19 @@
 	},
 	"scriptsHelp": {
 		"ghs-help": "Displays an overview of (nearly all) possible `npm run [SCRIPTKEY]` commands.",
-		"ghs-help-real-paths": "Like `ghs-help` but replaces path variables with values like configured in `DIR` array in `package.json`.",
+		"ghs-help-real-paths": "Like `ghs-help` but replaces path variables with values like configured in `DIR` block in `package.json`.",
 		"ghs-npm-update-check": "Check for updates for packages in `package.json`. Prints a list, not more.",
 		"ghs-ncu-override-json": "Check for updates for packages in `package.json`. AND override `package.json` file (newest stable versions). Don't forget to run npm install!",
 		"ghs-watch": "Starts a `nodemon` watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.",
-		"ghs-watch-upload": "Like `ghs-watch` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.",
+		"ghs-watch-upload": "Like `ghs-watch` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.",
 		"ghs-all": "Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`",
-		"ghs-all-upload": "Like `ghs-all` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.",
+		"ghs-all-upload": "Like `ghs-all` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.",
 		"ghs-rm": "Deletes **local** work directory `$npm_package_DIR_work` completely.",
 		"ghs-mkdir": "Creates **local** work directories `$npm_package_DIR_work/$npm_package_DIR_raw`.",
 		"ghs-compile": "Compiles *.scss files from `$npm_package_DIR_scss` to *.css files in **local** work dir `$npm_package_DIR_work`.",
 		"ghs-copy-raw": "Copies *.css and *.css.map to local dir `$npm_package_DIR_work/$npm_package_DIR_raw`.",
 		"ghs-prefix": "Runs Autoprefixer (See file `.browserslistrc`). \n- Source: All *.css files in **local** work dir `$npm_package_DIR_work`. \n- Target: Replaces *.css files in same dir.",
-		"ghs-minify": "Minifies all *.css to *.min.css in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.",
+		"ghs-minify": "Minifies all *.css files and adds *.min.css files in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.",
 		"ghs-produktiv": "Runs several npm scripts that match `ghs-produktiv-*`.",
 		"ghs-produktiv-mkdir": "Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and `version.txt` files (datetime).",
 		"ghs-produktiv-copy": "Copies all prefixed *.css and *.map to  TARGET dir `$npm_package_DIR_target/$npm_package_DIR_css`.",
@@ -36,7 +36,7 @@
 		"ghs-ftp-copy": "Copies all prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css`.",
 		"ghs-ftp-copyRaw": "Copies all NON-prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw`.",
 		
-		"ghs-upload": "Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it."
+		"ghs-upload": "Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it."
 		
 	},
   "keywords": [
