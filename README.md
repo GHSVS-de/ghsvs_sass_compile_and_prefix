@@ -104,10 +104,11 @@ Optional: `npm run ghs-watch`
 - Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
 
 
-> ghsvs_sass_compile_and_prefix@2020.1.1 ghs-help /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
-> php bin/help.php
 
-### Output of `npm run ghs-help` (path variables not translated)
+> ghsvs_sass_compile_and_prefix@2020.1.1 ghs-help-real-paths /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
+> php bin/help.php -r
+
+### Output of `npm run ghs-help-real-paths` (path variables replaced with values from package.json)
 #### What?
 - Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
 
@@ -144,57 +145,57 @@ Optional: `npm run ghs-watch`
 - Check for updates for packages in package.json. AND override package.json file (newest stable versions). Don't forget to run npm install!
 
 #### npm run ghs-watch
-- Starts a `nodemon` watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.
+- Starts a `nodemon` watcher for changes in scss directory `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.
 
 #### npm run ghs-all
 - Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`
 
 #### npm run ghs-rm
-- Deletes **local** work directory `$npm_package_DIR_work` completely.
+- Deletes **local** work directory `ghs` completely.
 
 #### npm run ghs-mkdir
-- Creates **local** work directories `$npm_package_DIR_work/$npm_package_DIR_raw`.
+- Creates **local** work directories `ghs/css-raw`.
 
 #### npm run ghs-compile
-- Compiles *.scss files from `$npm_package_DIR_scss` to *.css files in **local** work dir `$npm_package_DIR_work`.
+- Compiles *.scss files from `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/scss` to *.css files in **local** work dir `ghs`.
 
 #### npm run ghs-copy-raw
-- Copies *.css and *.css.map to local dir `$npm_package_DIR_work/$npm_package_DIR_raw`.
+- Copies *.css and *.css.map to local dir `ghs/css-raw`.
 
 #### npm run ghs-prefix
 - Runs Autoprefixer (See file `.browserslistrc`). 
-- Source: All *.css files in **local** work dir `$npm_package_DIR_work`. 
+- Source: All *.css files in **local** work dir `ghs`. 
 - Target: Replaces *.css files in same dir.
 
 #### npm run ghs-minify
-- Minifies all *.css to *.min.css in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.
+- Minifies all *.css to *.min.css in **local** `ghs` and `ghs/css-raw`.
 
 #### npm run ghs-produktiv
 - Runs several npm scripts that match `ghs-produktiv-*`.
 
 #### npm run ghs-produktiv-mkdir
-- Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and `version.txt` files (datetime).
+- Creates TARGET dirs `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css` and `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw` and `version.txt` files (datetime).
 
 #### npm run ghs-produktiv-copy
-- Copies all prefixed *.css and *.map to  TARGET dir `$npm_package_DIR_target/$npm_package_DIR_css`.
+- Copies all prefixed *.css and *.map to  TARGET dir `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css`.
 
 #### npm run ghs-produktiv-copyRaw
-- Copies all NON-prefixed *.css and *.map to TARGET dir `$npm_package_DIR_target/$npm_package_DIR_raw`.
+- Copies all NON-prefixed *.css and *.map to TARGET dir `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw`.
 
 #### npm run ghs-ftp
 - Runs several npm scripts that match `ghs-ftp-*`. to **prepare** **locally** the upload of files via FTP. **Runs no FTP upload.**
 
 #### npm run ghs-ftp-mkdir
-- Creates local dirs `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css` and `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw` and subfolders with `version.txt` files (datetime).
+- Creates local dirs `ghs/ftp-transfer/css` and `ghs/ftp-transfer/css-raw` and subfolders with `version.txt` files (datetime).
 
 #### npm run ghs-ftp-copy
-- Copies all prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css`.
+- Copies all prefixed *.css and *.map to local `ghs/ftp-transfer/css`.
 
 #### npm run ghs-ftp-copyRaw
-- Copies all NON-prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw`.
+- Copies all NON-prefixed *.css and *.map to local `ghs/ftp-transfer/css-raw`.
 
 #### npm run ghs-upload
-- Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
+- Runs the upload of all files/dirs via FTP inside dir `ghs/ftp-transfer`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
 
 ##### package.json. `scripts` block.
  ```Array
