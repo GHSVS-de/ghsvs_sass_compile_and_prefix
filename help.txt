@@ -7,19 +7,19 @@
 - Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.
 
 #### Tested?
-- Only with WSL (Windows Subsystem for Linux) + PHP 7.3 + Node + NPM on local machine.
+- Only with WSL (Windows Subsystem for Linux / DEBIAN) + PHP 7.3 + Node + NPM on local machine.
 
 #### Be aware
-- These npm scripts are very ungraceful. Always have a look on your console messages if the previous job has finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)
+- These npm scripts are very ungraceful. Always have a look on your console messages if the previous job is finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)
 
 #### How to start a script
 - `npm run [SCRIPTKEY]`
 
-#### The DIR-Array (inside package.json)
+#### The DIR block (inside package.json)
 - scss: Variable `$npm_package_DIR_scss` (absolute path). The source *.scss-directory.
 - target: Variable `$npm_package_DIR_target` (absolute path). Dir (normally a template folder) where all the compiled, prefixed, minified CSS files (inside subfolders) are copied to after all these steps are finished.
-- work: Variable `$npm_package_DIR_work` (relative path). Temporary local work directory inside same folder where package.json is located.
-- css: Variable `$npm_package_DIR_css` (relative path. Dir where all compiled, prefixed, minified CSS files are copied to.
+- work: Variable `$npm_package_DIR_work` (relative path). Temporary local work directory inside same folder where `package.json` is located.
+- css: Variable `$npm_package_DIR_css` (relative path). Dir where all compiled, prefixed, minified CSS files are copied to.
 - raw:  Variable `$npm_package_DIR_raw` (relative path). Dir where all compiled, minified **BUT NOT PREFIXED** CSS files are copied to.
 - ftp:  Variable `$npm_package_DIR_ftp` (relative path). Dir where all compiled, prefixed, minified CSS files are copied to. Source folder for FTP transfer.
 
@@ -39,7 +39,7 @@
 - Displays an overview of (nearly all) possible `npm run [SCRIPTKEY]` commands.
 
 #### npm run ghs-help-real-paths
-- Like `ghs-help` but replaces path variables with values like configured in `DIR` array in `package.json`.
+- Like `ghs-help` but replaces path variables with values like configured in `DIR` block in `package.json`.
 
 #### npm run ghs-npm-update-check
 - Check for updates for packages in `package.json`. Prints a list, not more.
@@ -51,13 +51,13 @@
 - Starts a `nodemon` watcher for changes in scss directory `$npm_package_DIR_scss` that starts a complete, new compilation via `npm run ghs-all` when a scss file is changed. Also starts a complete, new compilation if the watcher is started.
 
 #### npm run ghs-watch-upload
-- Like `ghs-watch` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
+- Like `ghs-watch` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
 
 #### npm run ghs-all
 - Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`
 
 #### npm run ghs-all-upload
-- Like `ghs-all` plus FTP-Upload. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
+- Like `ghs-all` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
 
 #### npm run ghs-rm
 - Deletes **local** work directory `$npm_package_DIR_work` completely.
@@ -77,7 +77,7 @@
 - Target: Replaces *.css files in same dir.
 
 #### npm run ghs-minify
-- Minifies all *.css to *.min.css in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.
+- Minifies all *.css files and adds *.min.css files in **local** `$npm_package_DIR_work` and `$npm_package_DIR_work/$npm_package_DIR_raw`.
 
 #### npm run ghs-produktiv
 - Runs several npm scripts that match `ghs-produktiv-*`.
@@ -104,7 +104,18 @@
 - Copies all NON-prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw`.
 
 #### npm run ghs-upload
-- Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED ftp-credentials.json! Check twice and test before using it.
+- Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
+
+#### FTP configuration (inside ftp-credentials.json)
+- **No guarantees concerning security!**- See also file `ftp-credentials-example.json`.
+- place a comment here: Place one if you want to. No usage.
+- server: The FTP Server/Host.
+- user: The FTP username.
+- password: The password of user.
+- remoteDir: The ftp directory. Starts and ends with a slash (`/`)! If it's the FTP ROOT just a single slash.
+- dir: The local directory No slash (`/`) before and after! All **contents** of this dir will be transfered to `remoteDir`.
+- ssl: **I have never tested with value `false`!**.
+- passive: At least `true` on Windows is recommended because of firewall blockades.
 
 ##### package.json. `scripts` block.
  ```Array
