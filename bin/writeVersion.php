@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /**
  * Creates folders __Prefixed-CSS and __NOT-Prefixed-CSS in workdir -w and version.txt with date of creation.

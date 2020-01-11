@@ -17698,6 +17698,14 @@ div.salvattoreColumns {
   padding-right: 50px;
 }
 
+body {
+  background-color: transparent;
+}
+
+#mainBackground {
+  background-color: #990134;
+}
+
 a.disabled,
 .disabled a,
 a.btn,

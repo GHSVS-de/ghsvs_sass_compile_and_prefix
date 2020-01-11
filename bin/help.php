@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 require_once('defines.php');
 
@@ -19,7 +20,8 @@ else
 $scriptsHelp = array(
 	'What?' => 'Compiles, minifies, autoprefixes *.scss files to CSS and creates source-maps.',
 	'Tested?' => 'Only with WSL (Windows Subsystem for Linux / DEBIAN) + PHP 7.3 + Node + NPM on local machine.',
-	'Be aware' => 'These npm scripts are very ungraceful. Always have a look on your console messages if the previous job is finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)', 
+	'Be aware' => 'These npm scripts are very ungraceful. Always have a look on your console messages if the previous job is finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)' . NL .
+	'- The very first usage of `npm run` after opening the WSL console is always slow.', 
 	'How to start a script' =>  '`npm run [SCRIPTKEY]`',
 	'The DIR block (inside package.json)' =>
 	'scss: Variable `$npm_package_DIR_scss` (absolute path). The source *.scss-directory.' . NL
@@ -33,9 +35,10 @@ $scriptsHelp = array(
 
 $ftpHelp = array(
 	'FTP configuration (inside ftp-credentials.json)' =>
-	'**No guarantees concerning security!**'
+	'**No guarantees concerning security!**' . NL
 	. '- See also file `ftp-credentials-example.json`.' . NL
 	. '- place a comment here: Place one if you want to. No usage.' . NL
+	. '- connectionName: "Whatever" string. An information displayed in console when the FTP script starts.' . NL
 	. '- server: The FTP Server/Host.' . NL
 	. '- user: The FTP username.' . NL
 	. '- password: The password of user.' . NL

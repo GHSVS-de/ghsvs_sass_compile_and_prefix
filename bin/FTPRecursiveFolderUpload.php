@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 
 // https://gist.github.com/Tchekda/40736c320d3733d9e4522a57bb24c9f7
@@ -11,6 +12,10 @@ if (empty($ftpJson['ftp']))
 	echo 'Info: No FTP-Credentials in ' . mkShortPath(__FILE__) . '. No FTP upload possible.' . NL . NL;
 	return;
 }
+
+echo '#################################' . NL
+. 'Starting FTP script. ' . $ftpJson['ftp']['connectionName'] . NL
+. '#################################' . NL;
 
 $ftp_server = $ftpJson['ftp']['server'];
 $ftp_user_name = $ftpJson['ftp']['user'];
@@ -116,7 +121,7 @@ if ($files)
 			return;
 		}
 
-		echo 'Success!' . NL; 
+		// echo 'Success!' . NL; 
 	}
 }
 else
@@ -126,6 +131,8 @@ else
 
 ftp_close($conn_id);
 
-echo 'Finished.' . NL;
+echo '#################################' . NL
+. 'FTP script finished. ' . $ftpJson['ftp']['connectionName'] . NL
+. '#################################' . NL;
 
 return;

@@ -1,18 +1,9 @@
 You should know what you do if you use these scripts!
 
-`cd /mnt/z/git-kram/ghsvs_sass_compile_and_prefix/`
-
-`npm install`
-
-Optional: `npm run ghs-watch`
-
-`npm run ghs-all`
-
 ## "Overview"
 
-
-> ghsvs_sass_compile_and_prefix@2020.1.1 ghs-help /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
-> php bin/help.php
+> ghsvs_sass_compile_and_prefix@2020.1.11 ghs-help /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
+> bin/help.php
 
 ### Output of `npm run ghs-help` (path variables not translated)
 #### What?
@@ -23,6 +14,7 @@ Optional: `npm run ghs-watch`
 
 #### Be aware
 - These npm scripts are very ungraceful. Always have a look on your console messages if the previous job is finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)
+- The very first usage of `npm run` after opening the WSL console is always slow.
 
 #### How to start a script
 - `npm run [SCRIPTKEY]`
@@ -69,7 +61,10 @@ Optional: `npm run ghs-watch`
 - Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`
 
 #### npm run ghs-all-upload
-- Like `ghs-all` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
+- Like `ghs-all` **plus FTP upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
+
+#### npm run ghs-all-local
+- Nearly like `ghs-all` but **only files creation in local work dir** `$npm_package_DIR_work` and subfolders. No transfer to `$npm_package_DIR_target/*`. No FTP upload.
 
 #### npm run ghs-rm
 - Deletes **local** work directory `$npm_package_DIR_work` completely.
@@ -95,7 +90,7 @@ Optional: `npm run ghs-watch`
 - Runs several npm scripts that match `ghs-produktiv-*`.
 
 #### npm run ghs-produktiv-mkdir
-- Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and `version.txt` files (datetime).
+- Creates TARGET dirs `$npm_package_DIR_target/$npm_package_DIR_css` and `$npm_package_DIR_target/$npm_package_DIR_raw` and `version.txt` files (datetime). No harm if they already exist. Existing folders and files stay alive.
 
 #### npm run ghs-produktiv-copy
 - Copies all prefixed *.css and *.map to  TARGET dir `$npm_package_DIR_target/$npm_package_DIR_css`.
@@ -107,7 +102,7 @@ Optional: `npm run ghs-watch`
 - Runs several npm scripts that match `ghs-ftp-*`. to **prepare** **locally** the upload of files via FTP. **Runs no FTP upload.**
 
 #### npm run ghs-ftp-mkdir
-- Creates local dirs `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css` and `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw` and subfolders with `version.txt` files (datetime).
+- Creates local dirs `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css` and `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw` and subfolders with `version.txt` files (datetime). No harm if they already exist. Existing folders and files stay alive.
 
 #### npm run ghs-ftp-copy
 - Copies all prefixed *.css and *.map to local `$npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css`.
@@ -118,9 +113,8 @@ Optional: `npm run ghs-watch`
 #### npm run ghs-upload
 - Runs the upload of all files/dirs via FTP inside dir `$npm_package_DIR_work/$npm_package_DIR_ftp`. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
 
-
-> ghsvs_sass_compile_and_prefix@2020.1.1 ghs-help-real-paths /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
-> php bin/help.php -r
+> ghsvs_sass_compile_and_prefix@2020.1.11 ghs-help-real-paths /mnt/z/git-kram/ghsvs_sass_compile_and_prefix
+> bin/help.php -r
 
 ### Output of `npm run ghs-help-real-paths` (path variables replaced with values from package.json)
 #### What?
@@ -131,6 +125,7 @@ Optional: `npm run ghs-watch`
 
 #### Be aware
 - These npm scripts are very ungraceful. Always have a look on your console messages if the previous job is finished before you fire a new command or save your scss when `nodemon` watchers are active or this or that. Or optmize yourself the scripts for your needs ;-)
+- The very first usage of `npm run` after opening the WSL console is always slow.
 
 #### How to start a script
 - `npm run [SCRIPTKEY]`
@@ -177,7 +172,10 @@ Optional: `npm run ghs-watch`
 - Runs a complete job **without FTP upload**: `ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp`
 
 #### npm run ghs-all-upload
-- Like `ghs-all` **plus FTP-Upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
+- Like `ghs-all` **plus FTP upload**. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
+
+#### npm run ghs-all-local
+- Nearly like `ghs-all` but **only files creation in local work dir** `ghs` and subfolders. No transfer to `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/*`. No FTP upload.
 
 #### npm run ghs-rm
 - Deletes **local** work directory `ghs` completely.
@@ -203,7 +201,7 @@ Optional: `npm run ghs-watch`
 - Runs several npm scripts that match `ghs-produktiv-*`.
 
 #### npm run ghs-produktiv-mkdir
-- Creates TARGET dirs `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css` and `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw` and `version.txt` files (datetime).
+- Creates TARGET dirs `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css` and `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css-raw` and `version.txt` files (datetime). No harm if they already exist. Existing folders and files stay alive.
 
 #### npm run ghs-produktiv-copy
 - Copies all prefixed *.css and *.map to  TARGET dir `/mnt/z/_jobs/ghsvs-de-relaunch-bs3/templates/bs4ghsvs/css`.
@@ -215,7 +213,7 @@ Optional: `npm run ghs-watch`
 - Runs several npm scripts that match `ghs-ftp-*`. to **prepare** **locally** the upload of files via FTP. **Runs no FTP upload.**
 
 #### npm run ghs-ftp-mkdir
-- Creates local dirs `ghs/ftp-transfer/css` and `ghs/ftp-transfer/css-raw` and subfolders with `version.txt` files (datetime).
+- Creates local dirs `ghs/ftp-transfer/css` and `ghs/ftp-transfer/css-raw` and subfolders with `version.txt` files (datetime). No harm if they already exist. Existing folders and files stay alive.
 
 #### npm run ghs-ftp-copy
 - Copies all prefixed *.css and *.map to local `ghs/ftp-transfer/css`.
@@ -226,9 +224,11 @@ Optional: `npm run ghs-watch`
 #### npm run ghs-upload
 - Runs the upload of all files/dirs via FTP inside dir `ghs/ftp-transfer`. NEEDS A CORRECTLY CONFIGURED `ftp-credentials.json`! Check twice and test before using it.
 
-### FTP configuration (inside ftp-credentials.json)
-- **No guarantees concerning security!**- See also file `ftp-credentials-example.json`.
+#### FTP configuration (inside ftp-credentials.json)
+- **No guarantees concerning security!**
+- See also file `ftp-credentials-example.json`.
 - place a comment here: Place one if you want to. No usage.
+- connectionName: "Whatever" string. An information displayed in console when the FTP script starts.
 - server: The FTP Server/Host.
 - user: The FTP username.
 - password: The password of user.
@@ -237,31 +237,32 @@ Optional: `npm run ghs-watch`
 - ssl: **I have never tested with value `false`!**.
 - passive: At least `true` on Windows is recommended because of firewall blockades.
 
-### package.json. `scripts` block.
+##### package.json. `scripts` block.
  ```Array
 (
-    [ghs-help] => php bin/help.php
-    [ghs-help-real-paths] => php bin/help.php -r
+    [ghs-help] => bin/help.php
+    [ghs-help-real-paths] => bin/help.php -r
     [ghs-npm-update-check] => ncu
     [ghs-ncu-override-json] => ncu -u
     [ghs-watch] => nodemon --watch $npm_package_DIR_scss/ --ext scss --exec "npm run ghs-all"
     [ghs-watch-upload] => nodemon --watch $npm_package_DIR_scss/ --ext scss --exec "npm run ghs-all-upload"
     [ghs-all] => npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-produktiv ghs-ftp
     [ghs-all-upload] => npm-run-all ghs-all ghs-upload
+    [ghs-all-local] => npm-run-all ghs-rm ghs-mkdir ghs-compile ghs-copy-raw ghs-prefix ghs-minify ghs-ftp
     [ghs-rm] => cross-env-shell "shx rm -rf $npm_package_DIR_work"
     [ghs-mkdir] => cross-env-shell "shx mkdir -p $npm_package_DIR_work/$npm_package_DIR_raw"
     [ghs-compile] => node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 $npm_package_DIR_scss/ -o $npm_package_DIR_work/
     [ghs-copy-raw] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_raw
     [ghs-prefix] => postcss --config build/postcss.config.js --replace "$npm_package_DIR_work/*.css" "!$npm_package_DIR_work/*.min.css"
-    [ghs-minify] => php ./bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw
+    [ghs-minify] => bin/minify.php -w $npm_package_DIR_work -r $npm_package_DIR_work/$npm_package_DIR_raw
     [ghs-produktiv] => npm-run-all ghs-produktiv-*
-    [ghs-produktiv-mkdir] => php bin/writeVersion.php -w $npm_package_DIR_target
+    [ghs-produktiv-mkdir] => bin/writeVersion.php -w $npm_package_DIR_target
     [ghs-produktiv-copy] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_target/$npm_package_DIR_css/
     [ghs-produktiv-copyRaw] => cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/* $npm_package_DIR_target/$npm_package_DIR_raw/
     [ghs-ftp] => npm-run-all ghs-ftp-*
-    [ghs-ftp-mkdir] => php bin/writeVersion.php -w $npm_package_DIR_ftp -c
+    [ghs-ftp-mkdir] => bin/writeVersion.php -w $npm_package_DIR_ftp -c
     [ghs-ftp-copy] => cross-env-shell shx cp $npm_package_DIR_work/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_css
     [ghs-ftp-copyRaw] => cross-env-shell shx cp $npm_package_DIR_work/$npm_package_DIR_raw/*.{css,map} $npm_package_DIR_work/$npm_package_DIR_ftp/$npm_package_DIR_raw
-    [ghs-upload] => php ./bin/FTPRecursiveFolderUpload.php
+    [ghs-upload] => bin/FTPRecursiveFolderUpload.php
 )
 ```
